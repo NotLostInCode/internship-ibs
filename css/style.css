@@ -6,7 +6,6 @@ body {
     height: 100vh;
 }
 
-/* ===header=== */
 .header {
     display: flex;
     align-items: center;
@@ -33,11 +32,8 @@ body {
 .header__search-input:focus::placeholder {
     color: transparent;
 }
-/* /header */
 
 
-
-/* ===product=== */
 .product {
     display: flex;
     justify-content: center;
@@ -75,20 +71,13 @@ body {
     font-size: 14px;
     color: #545454;
 }
-/* /product */
 
-
-/* media requests for catalog */
 @media (max-width: 692px) {
     .product__element {
         flex: 0 0 190px;
     }
 }
-/* /media requests for catalog */
 
-
-
-/* ===detailed=== */
 .detailed-product {
     display: flex;
     margin: 0 24px;
@@ -168,10 +157,6 @@ body {
 }
 
 
-
-/* /detailed */
-
-/* media requests for detailed */
 @media (max-width: 978px) {
     .detailed-product {
         margin: 0;
@@ -204,5 +189,5 @@ body {
         margin: 0px 0px 16px 0px;
     }
 }
-/* /media requests for detailed */
+
 
