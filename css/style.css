@@ -24,16 +24,12 @@ body {
 .header__search:focus-within .header__search-img path{
     fill: #E97F03 ;
 }
-.header__search-input {}
-
 .header__search-input::placeholder {
     color: #323232;
 }
 .header__search-input:focus::placeholder {
     color: transparent;
 }
-
-
 .product {
     display: flex;
     justify-content: center;
@@ -89,10 +85,7 @@ body {
     padding: 50px 75px;
     border: 1px solid #F2F2F2;
 }
-.detailed-product__img {
-}
 .detailed-product__details {
-
     padding: 0px 24px 10px 24px;
 }
 .description__title {
