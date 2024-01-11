@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Детальная</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header__search">
+                <svg class="header__search-img" width="24" height="24" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#323232" d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z" />
+                </svg>
+                <input placeholder="Search products" type="search" class="header__search-input">
+            </div>
+
+            <div class="header__actions">
+                <button class="header__cart-button">
+                    <img src="icons/shopping.svg" alt="shopping" class="header__cart-icon">
+                </button>
+                <button class="header__profile-button">
+                    <img src="icons/profile.svg" alt="profile" class="header__profile-icon">
+                </button>
+            </div>
+        </header>
+
+        <main class="main">
+
+            <div class="detailed-product">
+                <div class="detailed-product__image">
+                    <img class="detailed-product__img" src="images/detailed-product.png" alt="detailed-product">
+                </div>
+
+                <div class="detailed-product__details">
+                    <div class="detailed-product__description">
+                        <h1 class="description__title">G Home</h1>
+                        <p class="description__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices ante sit amet mollis luctus. Morbi semper, tellus in finibus tristique, purus odio sodales sem, vitae dignissim enim metus vel purus. Quisque a rutrum leo. Phasellus quis ex sed magna finibus convallis varius luctus justo. Nullam et sapien vel magna ultrices pulvinar. Nunc felis ante, lobortis eget imperdiet in, iaculis at justo. Etiam libero nisl, hendrerit vitae ultricies vitae, pharetra a est. Vivamus vestibulum quam sit amet facilisis consequat. Curabitur sollicitudin arcu arcu, pretium aliquam nibh hendrerit a. Donec diam massa, tempus sed pulvinar a, fermentum et orci.</p>
+
+                        <h2 class="description__subtitle">Details</h2>
+                        <p class="description__text">Nulla et mauris sed elit semper pretium a quis augue. Fusce tempus est ex, eu porttitor nulla auctor et. Maecenas eget quam non risus porta elementum. Pellentesque posuere augue in malesuada fermentum. Maecenas vitae viverra mauris. Suspendisse a cursus libero. Pellentesque vitae purus eget lectus lobortis laoreet sed sollicitudin diam. Pellentesque pellentesque eu justo at ullamcorper. Quisque quis egestas magna. Vestibulum et felis id nisi dapibus viverra vel vitae nisl. Morbi lobortis nunc turpis, sed tincidunt quam cursus nec. Morbi eget lorem dolor.</p>
+                    </div>
+
+                    <div class="detailed-product__add">
+                        <div class="detailed-product__price">$129</div>
+
+
+                        <div class="detailed-product__controls">
+                            <div class="detailed-product__number-goods">
+                                <button class="detailed-product__decrement ">
+                                    <img src="icons/decrement.svg" alt="decrement">
+                                </button>
+                                <div class="detailed-product__number">1</div>
+                                <button class="detailed-product__increment ">
+                                    <img src="icons/increment.svg" alt="increment">
+                                </button>
+                            </div>
+                            <button class="detailed-product__add-to-cart">Add to cart</button>
+                            <button class="detailed-product__favorite">
+                                <img src="icons/favorite.svg" alt="favorite" class="detailed-product__favorite-icon">
+                            </button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+             </div>
+
+        </main>
+
+    </div>
+</body>
+</html>
