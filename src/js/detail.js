@@ -4,10 +4,12 @@ import { getItemDetail } from '../api/api.js'
 const pathname = window.location.pathname
 const id = pathname.split('/').pop()
 const product = await getItemDetail(id)
+const main = document.querySelector('.main')
 
-const detailedProduct = document.querySelector('.detailed-product')
-
-detailedProduct.innerHTML = `
+const createDetailProduct = (product) => {
+	const productDetailElement = document.createElement('div')
+	productDetailElement.classList.add('detailed-product')
+	productDetailElement.innerHTML = `
                 <div class="detailed-product__image">
                     <img class="detailed-product__img" src=${BASE_URL}${product.picture.path} alt="${product.picture.alt}">
                 </div>
@@ -41,3 +43,12 @@ detailedProduct.innerHTML = `
                     </div>
                 </div>
 `
+	return productDetailElement
+}
+
+if (product.error) {
+	console.error('Ошибка при получении данных')
+} else {
+	const detailProduct = createDetailProduct(product.data.content)
+	main.append(detailProduct)
+}

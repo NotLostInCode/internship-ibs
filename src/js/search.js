@@ -1,23 +1,30 @@
+import { getItemsCatalog } from '../api/api.js'
+import { createProductElements } from './catalog.js'
+
+const product = await getItemsCatalog()
+const productList = document.querySelector('.product__list')
 const headerSearch = document.querySelector('.header__search')
+const headerInput = document.querySelector('.header__search-input')
+
+if (product.error) {
+	console.error('Ошибка при получении данных')
+} else {
+	const productElements = createProductElements(product.data.content)
+	productList.append(...productElements)
+}
 
 const handleSearch = (event) => {
 	event.preventDefault()
 
-	const searchInput = document.querySelector('.header__search-input')
-	const trimmedSearchValue = searchInput.value.trim().toLowerCase()
-	const productElements = document.querySelectorAll('.product__element')
+	const searchInput = headerInput.value
 
-	productElements.forEach((product) => {
-		const productName = product.querySelector('.product__name')
-		const productText = productName.textContent.toLowerCase()
+	const filteredProducts = product.data.content.filter((product) =>
+		product.name.toLowerCase().includes(searchInput.toLowerCase())
+	)
 
-		if (productText.includes(trimmedSearchValue)) {
-			product.style.display = 'block'
-		} else {
-			product.style.display = 'none'
-		}
-	})
-	searchInput.value = ''
+	const productElements = createProductElements(filteredProducts)
+	productList.innerHTML = ''
+	productList.append(...productElements)
 }
 
 headerSearch.addEventListener('submit', handleSearch)

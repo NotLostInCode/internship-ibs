@@ -1,11 +1,7 @@
 import { BASE_URL } from '../api/constants.js'
-import { getItemsCatalog } from '../api/api.js'
 
-const products = await getItemsCatalog()
-const productList = document.querySelector('.product__list')
-
-const createProductElements = () => {
-	products.forEach((product) => {
+export const createProductElements = (products) => {
+	const productElements = products.map((product) => {
 		const productElement = document.createElement('article')
 		productElement.classList.add('product__element')
 		productElement.innerHTML = `
@@ -18,9 +14,8 @@ const createProductElements = () => {
                 <div class="product__price">$${product.price.value}</div>
             </a>
         `
-
-		productList.appendChild(productElement)
+		return productElement
 	})
-}
 
-createProductElements()
+	return productElements
+}
