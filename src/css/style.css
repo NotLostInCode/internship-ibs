@@ -72,6 +72,15 @@ body {
 	padding: 0px 0px 5px;
 }
 
+.product__list_no-products, .error-message {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	font-size: 45px;
+	text-align: center;
+}
+
 @media (max-width: 692px) {
 	.product__element {
 		flex: 0 0 190px;

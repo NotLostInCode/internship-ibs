@@ -4,9 +4,9 @@ export const getItemsCatalog = async () => {
 	try {
 		const response = await fetch(`${BASE_URL}/item`)
 		const data = await response.json()
-		return {data}
+		return { data: data.content }
 	} catch (error) {
-		return {error: true}
+		return { error: true }
 	}
 }
 
@@ -14,8 +14,8 @@ export const getItemDetail = async (id) => {
 	try {
 		const response = await fetch(`${BASE_URL}/item/${id}`)
 		const data = await response.json()
-		return {data}
+		return { data: data.content }
 	} catch (error) {
-		return {error: true}
+		return { error: true }
 	}
 }
