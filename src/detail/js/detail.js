@@ -14,7 +14,7 @@ if (product.error) {
 	errorMessage.textContent = 'Произошла ошибка при загрузке данных'
 	main.append(errorMessage)
 } else {
-	if (!product.data.length === 0) {
+	if (!product.data.length) {
 		const noProductMessage = document.createElement('p')
 		noProductMessage.classList.add('product__list_no-products')
 		noProductMessage.textContent = 'Товар отсутствует'
