@@ -1,4 +1,13 @@
-export const createProductElements = (products, baseUrl, like) => {
+import like from '/src/assets/icons/like.svg'
+
+export const createProductElements = (products, baseUrl, productList) => {
+	if (products.length === 0) {
+		const noProductMessage = document.createElement('p')
+		noProductMessage.classList.add('product__list_no-products')
+		noProductMessage.textContent = 'Товары отсутствует'
+		productList.append(noProductMessage)
+	}
+
 	const productElements = products.map((product) => {
 		const productElement = document.createElement('article')
 		productElement.classList.add('product__element')

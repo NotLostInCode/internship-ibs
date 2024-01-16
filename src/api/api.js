@@ -6,6 +6,7 @@ export const getItemsCatalog = async () => {
 		const data = await response.json()
 		return { data: data.content }
 	} catch (error) {
+		console.error('Ошибка при получении данных')
 		return { error: true }
 	}
 }
@@ -16,6 +17,7 @@ export const getItemDetail = async (id) => {
 		const data = await response.json()
 		return { data: data.content }
 	} catch (error) {
+		console.error('Ошибка при получении данных')
 		return { error: true }
 	}
 }
