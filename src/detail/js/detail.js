@@ -21,5 +21,6 @@ if (product.error) {
 		main.append(noProductMessage)
 	}
 	const detailProduct = createDetailProduct(product.data, BASE_URL)
+	const detailProduct = createDetailProduct(product.data, BASE_URL)
 	main.append(detailProduct)
 }
