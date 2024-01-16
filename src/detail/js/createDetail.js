@@ -1,4 +1,8 @@
-export const createDetailProduct = (product, baseUrl, increment, decrement, like) => {
+import increment from '/src/assets/icons/increment.svg'
+import decrement from '/src/assets/icons/decrement.svg'
+import like from '/src/assets/icons/like.svg'
+
+export const createDetailProduct = (product, baseUrl) => {
 	const productDetailElement = document.createElement('div')
 	productDetailElement.classList.add('detailed-product')
 	productDetailElement.innerHTML = `
