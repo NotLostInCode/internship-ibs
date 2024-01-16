@@ -1,11 +1,12 @@
 import { BASE_URL } from '../../api/constants.js'
 import { getItemDetail } from '../../api/api.js'
-import { createDetailProduct } from './createDetail.js'
+import {createDetailProduct} from './createDetail.js'
 
 const params = new URLSearchParams(window.location.search)
 const id = params.get('id')
 const product = await getItemDetail(id)
 const main = document.querySelector('.main')
+
 
 if (product.error) {
 	const errorMessage = document.createElement('p')
@@ -13,7 +14,7 @@ if (product.error) {
 	errorMessage.textContent = 'Произошла ошибка при загрузке данных'
 	main.append(errorMessage)
 } else {
-	if ([product.data].length === 0) {
+	if (!product.data.length === 0) {
 		const noProductMessage = document.createElement('p')
 		noProductMessage.classList.add('product__list_no-products')
 		noProductMessage.textContent = 'Товар отсутствует'
