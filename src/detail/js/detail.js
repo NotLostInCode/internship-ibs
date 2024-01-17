@@ -7,7 +7,6 @@ const id = params.get('id')
 const product = await getItemDetail(id)
 const main = document.querySelector('.main')
 
-console.log();
 
 if (product.error) {
 	const errorMessage = document.createElement('p')
