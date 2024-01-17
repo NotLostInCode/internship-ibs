@@ -7,6 +7,7 @@ const id = params.get('id')
 const product = await getItemDetail(id)
 const main = document.querySelector('.main')
 
+console.log();
 
 if (product.error) {
 	const errorMessage = document.createElement('p')
@@ -14,13 +15,12 @@ if (product.error) {
 	errorMessage.textContent = 'Произошла ошибка при загрузке данных'
 	main.append(errorMessage)
 } else {
-	if ([product.data].length) {
+	if (!Object.keys(product.data).length) {
 		const noProductMessage = document.createElement('p')
 		noProductMessage.classList.add('product__list_no-products')
 		noProductMessage.textContent = 'Товар отсутствует'
 		main.append(noProductMessage)
 	}
-	const detailProduct = createDetailProduct(product.data, BASE_URL)
 	const detailProduct = createDetailProduct(product.data, BASE_URL)
 	main.append(detailProduct)
 }

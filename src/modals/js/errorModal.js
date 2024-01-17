@@ -7,7 +7,6 @@ export const displayErrorModal = (message) => {
 	body.append(modal)
 
 	setTimeout(() => {
-		modal.classList.remove('show')
 		modal.remove()
 	}, 3000)
 }
