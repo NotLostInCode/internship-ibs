@@ -1,0 +1,18 @@
+.search {
+	display: flex;
+	align-items: center;
+	gap: 11px;
+	height: 40px;
+}
+.search:focus-within {
+	border-bottom: 2px solid #e97f03;
+}
+.search:focus-within .searchImg path {
+	fill: #e97f03;
+}
+.searchInput::placeholder {
+	color: #323232;
+}
+.searchInput:focus::placeholder {
+	color: transparent;
+}
