@@ -5,22 +5,13 @@ import {BASE_URL} from "../../../api/constansts";
 import increment from '../../../assets/icons/increment.svg'
 import decrement from '../../../assets/icons/decrement.svg'
 import like from '../../../assets/icons/like.svg'
-import {PictureType, PriceType} from "../Catalog";
+import {DetailType} from "../../../types";
+import {Error} from '../../../components/Error/Error'
 
-type DetailType = {
-    description: string
-    details: string
-    id: string
-    info: string
-    like: boolean
-    name: string
-    picture: PictureType
-    price: PriceType
-}
 
 export const Detail = () => {
     const [item, setItem] = useState<DetailType | null>(null)
-    const [error, setError] = useState<boolean>(false)
+    const [error, setError] = useState<boolean | string>(false)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,22 +20,17 @@ export const Detail = () => {
             const product = await getItemDetail(id)
             if (product.error) {
                 setError(product.error)
-            } else {
+            } else if (product.data){
                 setItem(product.data)
             }
         }
         fetchData()
     }, []);
-
-
-    const handleError = (message: string) => {
-        return <p className={styles.errorMessage}>{message}</p>
-    }
-
     return (
         <>
-            {!error && item
-                ? (<div className={styles.detailedProduct}>
+            {error || (!item || Object.keys(item).length === 0)
+                ? <Error error={error}/>
+                : <div className={styles.detailedProduct}>
                     <div className={styles.detailedImg}>
                         <img src={`${BASE_URL}${item.picture.path}`} alt={item.picture.alt}/>
                     </div>
@@ -77,10 +63,10 @@ export const Detail = () => {
                             </div>
                         </div>
                     </div>
-                </div>)
-                : (
-                    error ? handleError('Произошла ошибка при загрузке данных') : handleError('Товар отсутствует')
-                )}
+                </div>}
         </>
     )
 }
+
+
+

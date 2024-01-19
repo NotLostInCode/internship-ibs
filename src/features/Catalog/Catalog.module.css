@@ -32,14 +32,6 @@
 	color: #545454;
 	padding: 0px 0px 5px;
 }
-.errorMessage {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	font-size: 45px;
-	text-align: center;
-}
 
 @media (max-width: 692px) {
 	.productElement {

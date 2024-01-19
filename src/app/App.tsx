@@ -28,7 +28,7 @@ export const App = () => {
                     <Route path={'/detail'} element={<Detail/>}/>
                 </Routes>
             </div>
-            {errorMessage ? <Modal message={errorMessage}/> : null}
+            {errorMessage && <Modal message={errorMessage}/>}
         </div>
     );
 }

@@ -4,41 +4,24 @@ import {getItemsCatalog} from "../../api/api";
 import like from '../../assets/icons/like.svg'
 import {BASE_URL} from "../../api/constansts";
 import {NavLink} from "react-router-dom";
+import {ProductType} from "../../types/index";
+import {Error} from "../../components/Error/Error";
 
 
 type PropsType = {
     searchQuery: string
 }
-export type ProductType = {
-    description: string
-    id: string
-    like: boolean
-    name: string
-    picture: PictureType
-    price: PriceType
-}
-export type PictureType = {
-    alt: string
-    path: string
-}
-export type PriceType = {
-    currency: string
-    value: number
-}
-
 
 export const Catalog: FC<PropsType> = ({searchQuery}) => {
     const [items, setItems] = useState<ProductType[]>([])
-    const [error, setError] = useState<boolean>(false)
-
+    const [error, setError] = useState<string | boolean>(false)
 
     useEffect(() => {
         const fetchData = async () => {
             const products = await getItemsCatalog()
-
             if (products.error) {
                 setError(products.error)
-            } else {
+            } else if (products.data) {
                 setItems(products.data)
             }
         }
@@ -52,15 +35,11 @@ export const Catalog: FC<PropsType> = ({searchQuery}) => {
         setItems(filteredProducts)
     }, [searchQuery])
 
-
-    const handleError = (message: string) => {
-        return <p className={styles.errorMessage}>{message}</p>
-    }
-
     return (
         <>
-            {!error && items.length !== 0 ? (
-                items.map((product) => (
+            {error || !items.length
+                ? <Error error={error}/>
+                : items.map((product) => (
                     <article className={styles.productElement} key={product.id}>
                         <button className={styles.productButton}>
                             <img className={styles.productIcon} src={like} alt='like'/>
@@ -72,10 +51,10 @@ export const Catalog: FC<PropsType> = ({searchQuery}) => {
                             <div className={styles.productPrice}>{product.price.value}</div>
                         </NavLink>
                     </article>
-                ))
-            ) : (
-                error ? handleError('Произошла ошибка при загрузке данных') : handleError('Товары отсутствует')
-            )}
+                ))}
         </>
     );
 }
+
+
+

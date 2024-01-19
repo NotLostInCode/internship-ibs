@@ -11,12 +11,11 @@ export const Search:FC<PropsType> = ({handleSearch}) => {
 
     const debouncedHandleSearch = useDebounce((input: string) => {
         handleSearch(input);
-        console.log(input)
     }, 1000);
 
     const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.currentTarget.value;
-        debouncedHandleSearch(input);
+        debouncedHandleSearch(inputValue);
         setInput(inputValue);
     };
 
