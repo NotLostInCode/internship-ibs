@@ -1,35 +1,22 @@
 import styles from './Detail.module.css'
-import {useEffect, useState} from "react";
-import {getItemDetail} from "../../../api/api";
-import {BASE_URL} from "../../../api/constansts";
-import increment from '../../../assets/icons/increment.svg'
-import decrement from '../../../assets/icons/decrement.svg'
-import like from '../../../assets/icons/like.svg'
-import {DetailType} from "../../../types";
-import {Error} from '../../../components/Error/Error'
+import {FC} from "react";
+import {BASE_URL} from "../../api/constansts";
+import increment from '../../assets/icons/increment.svg'
+import decrement from '../../assets/icons/decrement.svg'
+import like from '../../assets/icons/like.svg'
+import {DetailType} from "../../types";
+import {Error} from "../Error/Error";
 
 
-export const Detail = () => {
-    const [item, setItem] = useState<DetailType | null>(null)
-    const [error, setError] = useState<boolean | string>(false)
+type PropsType = {
+    item: DetailType | null;
+}
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const params = new URLSearchParams(window.location.search);
-            const id = params.get('id');
-            const product = await getItemDetail(id)
-            if (product.error) {
-                setError(product.error)
-            } else if (product.data){
-                setItem(product.data)
-            }
-        }
-        fetchData()
-    }, []);
+export const Detail: FC<PropsType> = ({item}) => {
     return (
         <>
-            {error || (!item || Object.keys(item).length === 0)
-                ? <Error error={error}/>
+            {!item || Object.keys(item).length === 0
+                ? <Error text={'Товар отсутсвует'}/>
                 : <div className={styles.detailedProduct}>
                     <div className={styles.detailedImg}>
                         <img src={`${BASE_URL}${item.picture.path}`} alt={item.picture.alt}/>
@@ -64,6 +51,7 @@ export const Detail = () => {
                         </div>
                     </div>
                 </div>}
+
         </>
     )
 }
