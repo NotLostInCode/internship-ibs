@@ -5,19 +5,16 @@ import increment from '../../assets/icons/increment.svg'
 import decrement from '../../assets/icons/decrement.svg'
 import like from '../../assets/icons/like.svg'
 import {DetailType} from "../../types";
-import {Error} from "../Error/Error";
 
 
 type PropsType = {
-    item: DetailType | null;
+    item: DetailType
 }
 
 export const Detail: FC<PropsType> = ({item}) => {
     return (
         <>
-            {!item || Object.keys(item).length === 0
-                ? <Error text={'Товар отсутсвует'}/>
-                : <div className={styles.detailedProduct}>
+             <div className={styles.detailedProduct}>
                     <div className={styles.detailedImg}>
                         <img src={`${BASE_URL}${item.picture.path}`} alt={item.picture.alt}/>
                     </div>
@@ -50,7 +47,7 @@ export const Detail: FC<PropsType> = ({item}) => {
                             </div>
                         </div>
                     </div>
-                </div>}
+                </div>
 
         </>
     )

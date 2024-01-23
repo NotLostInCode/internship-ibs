@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useMemo, useState} from 'react';
 import {ProductType} from "../../types";
 import {getItemsCatalog} from "../../api/api";
 import {Catalog} from "../../components/Catalog/Catalog";
@@ -24,17 +24,17 @@ export const CatalogPage: FC<PropsType> = ({searchQuery}) => {
         fetchData()
     }, [])
 
-    useEffect(() => {
-        const filteredProducts = items.filter((product) =>
+    const filteredProducts = useMemo(() => {
+        return items.filter((product) =>
             product.name.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-        setItems(filteredProducts)
-    }, [searchQuery])
+        );
+
+    }, [items, searchQuery])
 
 
     return (
         <>
-            {error ? <Error text={error}/> : <Catalog items={items}/>}
+            {error || !items.length ? <Error text={error as string}/> : <Catalog items={filteredProducts}/>}
         </>
     );
 };

@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import styles from './Error.module.css'
 
 type PropsType = {
-    text: boolean | string
+    text: string
 }
 
 export const Error:FC<PropsType> = ({text}) => {

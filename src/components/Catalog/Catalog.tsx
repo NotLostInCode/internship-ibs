@@ -4,7 +4,7 @@ import like from '../../assets/icons/like.svg'
 import {BASE_URL} from "../../api/constansts";
 import {NavLink} from "react-router-dom";
 import {ProductType} from "../../types";
-import {Error} from "../Error/Error";
+
 
 
 type PropsType = {
@@ -14,9 +14,7 @@ type PropsType = {
 export const Catalog: FC<PropsType> = ({items}) => {
     return (
         <>
-            {!items.length
-                ? <Error text={'Товары отсутсвуют'}/>
-                : items.map((product) => (
+            {items.map((product) => (
                     <article className={styles.productElement} key={product.id}>
                         <button className={styles.productButton}>
                             <img className={styles.productIcon} src={like} alt='like'/>

@@ -1,14 +1,12 @@
 import styles from './App.module.css'
-import {Catalog} from "../components/Catalog/Catalog";
 import {Search} from "../components/Search/Search";
 import {Actions} from "../components/Actions/Actions";
-import {Detail} from "../components/Detail/Detail";
 import {Route, Routes} from 'react-router-dom';
 import {useState} from "react";
 import {Modal} from "../components/Modal/Modal";
 import {useModal} from "../hooks/useModal";
-import {CatalogPage} from "../features/CatalogPage/CatalogPage";
-import {DetailPage} from "../features/DetailPage/DetailPage";
+import {CatalogPage} from "../pages";
+import {DetailPage} from "../pages";
 
 export const App = () => {
     const [searchQuery, setSearchQuery] = useState('')
