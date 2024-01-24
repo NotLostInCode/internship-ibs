@@ -12,33 +12,10 @@ type GetDetailType = {
     content: DetailType
 }
 
-export const getItemsCatalog = async () => {
-    try {
-        const response = await instance.get<GetCatalogType>('/item')
-        return {data: response.data.content}
-    } catch (error) {
-        if (axios.isAxiosError(error)) {
-            console.error(error.message)
-            return {error: error.message}
-        } else {
-            console.error('Ошибка при получении данных')
-            return {error: true}
-        }
-    }
+export const getItemsCatalog = () => {
+    return instance.get<GetCatalogType>('/item')
 }
 
-export const getItemDetail = async (id: any) => {
-    try {
-        const response = await instance.get<GetDetailType>(`/item/${id}`)
-        return {data: response.data.content}
-    } catch (error) {
-        if (axios.isAxiosError(error)) {
-            console.error(error.message)
-            return {error: error.message}
-        } else {
-            console.error('Ошибка при получении данных')
-            return {error: true}
-        }
-    }
+export const getItemDetail = (id: any) => {
+    return instance.get<GetDetailType>(`/item/${id}`)
 }
-
