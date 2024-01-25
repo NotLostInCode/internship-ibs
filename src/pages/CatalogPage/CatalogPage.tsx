@@ -27,9 +27,9 @@ export const CatalogPage: FC<PropsType> = ({searchQuery}) => {
 
     return (
         <>
-            <Loader loading={loading} />
+            {loading && <Loader />}
             {!loading && (error || !items.length) && <Error text={error || 'Товары отсутствуют'} />}
-            {!loading && !error && !!items.length && <Catalog items={items} />}
+            {!loading && !error && items.length && <Catalog items={items} />}
         </>
     );
 };

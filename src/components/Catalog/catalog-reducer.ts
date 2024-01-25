@@ -33,11 +33,11 @@ const slice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchItems.fulfilled, (state, action) => {
-                state.items.push(...action.payload)
+                state.items = action.payload
                 state.loading = false
             })
             .addCase(fetchItems.rejected, (state, action) => {
-                state.error = action.error.message ? action.error.message : 'Ошибка при получении данных'
+                state.error = 'Ошибка при получении данных'
                 state.loading = false
             })
             .addCase(fetchItems.pending, (state, action) => {

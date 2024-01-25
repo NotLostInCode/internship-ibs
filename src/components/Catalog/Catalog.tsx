@@ -16,7 +16,7 @@ export const Catalog: FC<PropsType> = ({items}) => {
     return (
         <>
             {items.map((product, index) => (
-                    <article className={styles.productElement} key={index}>
+                    <article className={styles.productElement} key={product.id}>
                         <button className={styles.productButton}>
                             <img className={styles.productIcon} src={like} alt='like'/>
                         </button>

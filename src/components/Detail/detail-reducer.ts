@@ -30,7 +30,7 @@ const slice = createSlice({
                 state.loading = false
             })
             .addCase(fetchItem.rejected, (state, action) => {
-                state.error = action.error.message ? action.error.message : 'Ошибка при получении данных'
+                state.error = 'Ошибка при получении данных'
                 state.loading = false
             })
             .addCase(fetchItem.pending, (state, action) => {

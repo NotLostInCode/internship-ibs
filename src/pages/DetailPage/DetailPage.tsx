@@ -13,7 +13,7 @@ import {useParams} from "react-router-dom";
 export const DetailPage = () => {
     const {item, error, loading} = useSelector((state: AppRootStateType) => state.detail)
     const dispatch = useAppDispatch()
-    let {id} = useParams()
+    const {id} = useParams()
 
     useEffect(() => {
         if(id) {
@@ -24,7 +24,7 @@ export const DetailPage = () => {
 
     return (
         <>
-            <Loader loading={loading} />
+            {loading && <Loader />}
             {!loading && (error || !item) && <Error text={error || 'Товар отсутствует'} />}
             {!loading && !error && item && <Detail item={item} />}
         </>

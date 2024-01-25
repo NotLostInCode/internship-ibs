@@ -1,10 +1,3 @@
-import React, {FC} from 'react';
+export const Loader = () =>  <div>Loading...</div>
 
-type PropsType = {
-    loading: boolean
-}
-
-export const Loader: FC<PropsType> = ({loading}) => {
-    return loading ? <div>Loading...</div> : null;
-};
 
