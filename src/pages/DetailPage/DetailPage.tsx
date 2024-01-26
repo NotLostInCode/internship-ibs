@@ -1,33 +1,32 @@
-import React, {useEffect, useState} from 'react';
-import {DetailType} from "../../types";
-import {getItemDetail} from "../../api/api";
+import React, {useEffect} from 'react';
 import {Error} from "../../components/Error/Error";
 import {Detail} from "../../components/Detail/Detail";
-import {useLocation} from "react-router-dom";
+import {fetchItem} from "../../components/Detail/detail-reducer";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../app/store";
+import {Loader} from "../../components/Loader/Loader";
+import {useParams} from "react-router-dom";
+
+
 
 export const DetailPage = () => {
-    const [item, setItem] = useState<DetailType | null>(null)
-    const [error, setError] = useState<boolean | string>(false)
-    const location = useLocation()
+    const {item, error, loading} = useSelector((state: AppRootStateType) => state.detail)
+    const dispatch = useAppDispatch()
+    const {id} = useParams()
 
     useEffect(() => {
-        const fetchData = async () => {
-            const params = new URLSearchParams(location.search)
-            const id = params.get('id');
-            const product = await getItemDetail(id)
-            if (product.error) {
-                setError(product.error)
-            } else if (product.data) {
-                setItem(product.data)
-            }
+        if(id) {
+            dispatch(fetchItem(id))
         }
-        fetchData()
-    }, []);
+    }, [dispatch, id])
+
+
     return (
         <>
-            {error || !item
-                ? <Error text={error as string}/>
-                : <Detail item={item}/>}
+            {loading && <Loader />}
+            {!loading && (error || !item) && <Error text={error || 'Товар отсутствует'} />}
+            {!loading && !error && item && <Detail item={item} />}
         </>
     );
 };

@@ -1,40 +1,35 @@
-import React, {FC, useEffect, useMemo, useState} from 'react';
-import {ProductType} from "../../types";
-import {getItemsCatalog} from "../../api/api";
+import React, {FC, useEffect} from 'react';
 import {Catalog} from "../../components/Catalog/Catalog";
 import {Error} from "../../components/Error/Error";
+import {fetchItems, searchItemsCatalog} from "../../components/Catalog/catalog-reducer";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../app/store";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {Loader} from "../../components/Loader/Loader";
+
 
 type PropsType = {
     searchQuery: string
 }
 
 export const CatalogPage: FC<PropsType> = ({searchQuery}) => {
-    const [items, setItems] = useState<ProductType[]>([])
-    const [error, setError] = useState<string | boolean>(false)
+    const {items, error, loading} = useSelector((state: AppRootStateType) => state.catalog);
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        const fetchData = async () => {
-            const products = await getItemsCatalog()
-            if (products.error) {
-                setError(products.error)
-            } else if (products.data) {
-                setItems(products.data)
-            }
-        }
-        fetchData()
+        dispatch(fetchItems())
     }, [])
 
-    const filteredProducts = useMemo(() => {
-        return items.filter((product) =>
-            product.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-
-    }, [items, searchQuery])
+    useEffect(() => {
+        dispatch(searchItemsCatalog(items, searchQuery))
+    }, [searchQuery])
 
 
     return (
         <>
-            {error || !items.length ? <Error text={error as string}/> : <Catalog items={filteredProducts}/>}
+            {loading && <Loader />}
+            {!loading && (error || !items.length) && <Error text={error || 'Товары отсутствуют'} />}
+            {!loading && !error && items.length && <Catalog items={items} />}
         </>
     );
 };

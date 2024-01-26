@@ -12,14 +12,15 @@ type PropsType = {
 }
 
 export const Catalog: FC<PropsType> = ({items}) => {
+
     return (
         <>
-            {items.map((product) => (
+            {items.map((product, index) => (
                     <article className={styles.productElement} key={product.id}>
                         <button className={styles.productButton}>
                             <img className={styles.productIcon} src={like} alt='like'/>
                         </button>
-                        <NavLink to={'/detail'} className={styles.productContent}>
+                        <NavLink to={`/detail/${product.id}`} className={styles.productContent}>
                             <img
                                 className={styles.productImg}
                                 src={`${BASE_URL}${product.picture.path}`}
