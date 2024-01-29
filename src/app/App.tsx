@@ -1,4 +1,3 @@
-import styles from './App.module.css'
 import {Search} from "../components/Search/Search";
 import {Actions} from "../components/Actions/Actions";
 import {Route, Routes} from 'react-router-dom';
@@ -7,6 +6,8 @@ import {Modal} from "../components/Modal/Modal";
 import {useModal} from "../hooks/useModal";
 import {CatalogPage} from "../pages";
 import {DetailPage} from "../pages";
+import Grid from '@mui/material/Grid';
+import Box from "@mui/material/Box";
 
 
 export const App = () => {
@@ -18,19 +19,25 @@ export const App = () => {
     }
 
     return (
-        <div className="App">
-            <div className={styles.app}>
-                <Search handleSearch={handleSearch}/>
-                <Actions/>
-            </div>
-            <div className={styles.productList}>
-                <Routes>
-                    <Route path={'/'} element={<CatalogPage searchQuery={searchQuery}/>}/>
-                    <Route path={'/detail/:id'} element={<DetailPage/>}/>
-                </Routes>
-            </div>
-            {errorMessage && <Modal message={errorMessage}/>}
-        </div>
+        <Box>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Grid container justifyContent="space-between" alignItems="center">
+              <Search handleSearch={handleSearch} />
+              <Actions />
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container justifyContent="center" spacing={2}>
+              <Routes>
+                <Route path={'/'} element={<CatalogPage searchQuery={searchQuery} />} />
+                <Route path={'/detail/:id'} element={<DetailPage />} />
+              </Routes>
+            </Grid>
+          </Grid>
+        </Grid>
+        {errorMessage && <Modal message={errorMessage} />}
+      </Box>
     );
 }
 

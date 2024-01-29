@@ -6,31 +6,41 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {Loader} from "../../components/Loader/Loader";
-
+import { useGetItemsCatalogQuery } from '../../api/api';
 
 type PropsType = {
     searchQuery: string
 }
 
 export const CatalogPage: FC<PropsType> = ({searchQuery}) => {
-    const {items, error, loading} = useSelector((state: AppRootStateType) => state.catalog);
+   
+    const { data, error, isLoading } = useGetItemsCatalogQuery()
+    const {items} = useSelector((state: AppRootStateType) => state.catalog);
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchItems())
-    }, [])
+       if(data && data.content) {
+        dispatch(fetchItems(data.content))
+       }
+    }, [data, dispatch])
 
     useEffect(() => {
         dispatch(searchItemsCatalog(items, searchQuery))
     }, [searchQuery])
 
 
-    return (
-        <>
-            {loading && <Loader />}
-            {!loading && (error || !items.length) && <Error text={error || 'Товары отсутствуют'} />}
-            {!loading && !error && items.length && <Catalog items={items} />}
-        </>
-    );
-};
 
+    if (isLoading) {
+        return <Loader />
+    }
+
+    if (error && 'error' in error) {
+        return <Error text={error.error} />
+    }
+
+    if (items.length) {
+        return <Catalog items={items} />
+    }
+
+    return <Error text="Товары отсутствуют" />
+}
