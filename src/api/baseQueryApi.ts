@@ -4,7 +4,7 @@ import type {
   FetchArgs,
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query'
-import { setErrorMessage } from '../components/Catalog/catalog-reducer'
+import { setErrorMessage } from '../components/Error/error-reducer'
 
 
 const baseQuery = fetchBaseQuery({ baseUrl: 'http://localhost:3006' })

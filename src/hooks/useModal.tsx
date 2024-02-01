@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
 import { AppRootStateType } from '../app/store';
 import { useAppDispatch } from './useAppDispatch';
-import { setErrorMessage } from '../components/Catalog/catalog-reducer';
+import { setErrorMessage } from '../components/Error/error-reducer';
 
 
 export const useModal = () => {
-    const errorMessage = useSelector((state: AppRootStateType) => state.catalog.error)
+    const errorMessage = useSelector((state: AppRootStateType) => state.error.error)
     const dispatch = useAppDispatch()
     
 

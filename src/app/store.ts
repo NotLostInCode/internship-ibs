@@ -1,14 +1,12 @@
 import {Action, configureStore} from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
-import {catalogReducer} from "../components/Catalog/catalog-reducer";
-import {detailReducer} from "../components/Detail/detail-reducer";
+import {errorReducer} from "../components/Error/error-reducer";
 import { items } from '../api/api';
 
 
 const rootReducer = combineReducers({
-    catalog: catalogReducer,
-    detail: detailReducer,
+    error: errorReducer,
     [items.reducerPath]: items.reducer,
 });
 
