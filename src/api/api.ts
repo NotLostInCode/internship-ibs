@@ -1,9 +1,6 @@
-import axios from 'axios'
 import {DetailType, ProductType} from "../types";
-
-export const instance = axios.create({
-    baseURL: 'http://localhost:3006',
-})
+import { createApi} from '@reduxjs/toolkit/query/react';
+import { baseQueryApi } from './baseQueryApi';
 
 type GetCatalogType = {
     content: ProductType[]
@@ -12,10 +9,22 @@ type GetDetailType = {
     content: DetailType
 }
 
-export const getItemsCatalog = () => {
-    return instance.get<GetCatalogType>('/item')
-}
+export const items = createApi({
+  reducerPath: 'items',
+  baseQuery: baseQueryApi,
+  endpoints: (builder) => ({
+    getItemsCatalog: builder.query<GetCatalogType, void>({
+      query: () => '/item',
+    }),
+    getItemDetail: builder.query<GetDetailType, string>({
+      query: (id) => `/item/${id}`,
+    }),
+  }),
+});
 
-export const getItemDetail = (id: any) => {
-    return instance.get<GetDetailType>(`/item/${id}`)
-}
+export const { useGetItemsCatalogQuery, useGetItemDetailQuery } = items;
+
+
+
+
+

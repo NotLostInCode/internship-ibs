@@ -1,22 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {instance} from "../api/api";
+import { useSelector } from 'react-redux';
+import { AppRootStateType } from '../app/store';
+import { useAppDispatch } from './useAppDispatch';
+import { setErrorMessage } from '../components/Error/error-reducer';
+
 
 export const useModal = () => {
-    const [errorMessage, setErrorMessage] = useState<string | null>('')
-
-    instance.interceptors.response.use(
-        (response) => {
-            return response
-        },
-        (error) => {
-            setErrorMessage(error.message)
-            return Promise.reject(error)
-        }
-    )
+    const errorMessage = useSelector((state: AppRootStateType) => state.error.error)
+    const dispatch = useAppDispatch()
+    
 
     useEffect(() => {
         setTimeout(() => {
-            setErrorMessage(null)
+            dispatch(setErrorMessage(null))
         }, 5000)
     }, [errorMessage]);
 

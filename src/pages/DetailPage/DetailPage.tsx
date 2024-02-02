@@ -1,32 +1,27 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Error} from "../../components/Error/Error";
 import {Detail} from "../../components/Detail/Detail";
-import {fetchItem} from "../../components/Detail/detail-reducer";
-import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../app/store";
 import {Loader} from "../../components/Loader/Loader";
 import {useParams} from "react-router-dom";
+import { useGetItemDetailQuery } from '../../api/api';
 
 
 
 export const DetailPage = () => {
-    const {item, error, loading} = useSelector((state: AppRootStateType) => state.detail)
-    const dispatch = useAppDispatch()
     const {id} = useParams()
+    const { data, error, isLoading } = useGetItemDetailQuery(id as string)
 
-    useEffect(() => {
-        if(id) {
-            dispatch(fetchItem(id))
-        }
-    }, [dispatch, id])
+     if (isLoading) {
+        return <Loader />
+    }
 
+    if (error && 'error' in error) {
+        return <Error text={error.error} />; 
+    }
 
-    return (
-        <>
-            {loading && <Loader />}
-            {!loading && (error || !item) && <Error text={error || 'Товар отсутствует'} />}
-            {!loading && !error && item && <Detail item={item} />}
-        </>
-    );
+    if (data) {
+        return <Detail item={data.content} />
+    }
+
+    return <Error text="Товар отсутствует" />
 };
